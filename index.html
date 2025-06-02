@@ -934,30 +934,34 @@
                 e.preventDefault(); 
                 // Impede o envio padrão do formulário
         
-            const formData = new URLSearchParams({
-                      name: document.getElementById('name').value,
-                      email: document.getElementById('email').value,
-                      phone: document.getElementById('phone').value,
-                      message: document.getElementById('message').value
-                    });
-                
-                    fetch("https://script.google.com/macros/s/AKfycbyAv7r4HtYMYyCRPilK1IXuO4aECd9kZmq8GZd9tGDB3DmO7gAMrwHoBHAmpIKXmZwh/exec", {
-                      method: "POST",
-                      body: formData
-                    })
-                    .then(response => response.text())
-                    .then(text => {
-                      if(text === "Success") {
-                        alert("Mensagem enviada com sucesso!");
-                        contactForm.reset();  // Limpa campos
-                      } else {
-                        alert("Erro ao enviar a mensagem. Tente novamente.");
-                      }
-                    })
-                    .catch(() => {
-                      alert("Erro ao enviar a mensagem. Tente novamente.");
-                    });
-                  });
+            const contactForm = document.getElementById('contact-form');
+            contactForm.addEventListener('submit', function(e) {
+              e.preventDefault(); // evita reload
+            
+              const formData = new URLSearchParams({
+                name: document.getElementById('name').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                phone: document.getElementById('phone').value.trim(),
+                message: document.getElementById('message').value.trim()
+              });
+            
+              fetch("https://script.google.com/macros/s/AKfycbyAv7r4HtYMYyCRPilK1IXuO4aECd9kZmq8GZd9tGDB3DmO7gAMrwHoBHAmpIKXmZwh/exec", {
+                method: "POST",
+                body: formData
+              })
+              .then(response => response.text())
+              .then(text => {
+                if (text && text.toLowerCase().includes("success")) {
+                  alert("Mensagem enviada com sucesso!");
+                  contactForm.reset();
+                } else {
+                  alert("Erro inesperado ao enviar a mensagem. Por favor, tente novamente.");
+                }
+              })
+              .catch(() => {
+                alert("Erro ao enviar a mensagem. Verifique sua conexão e tente novamente.");
+              });
+            });
         </script>
         
         <script>
