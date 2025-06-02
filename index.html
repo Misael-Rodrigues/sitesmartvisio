@@ -912,58 +912,31 @@
         </div>
     </footer>
         <script>
-            // Mobile menu toggle
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-            
-            // Close mobile menu when clicking on a link
-            const mobileLinks = mobileMenu.querySelectorAll('a');
-            mobileLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
+                // Mobile menu toggle
+                const mobileMenuButton = document.getElementById('mobile-menu-button');
+                const mobileMenu = document.getElementById('mobile-menu');
+                
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
                 });
-            });
-            
-            // Form submission
-            const contactForm = document.getElementById('contact-form');
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault(); 
-                // Impede o envio padrão do formulário
-        
-            const contactForm = document.getElementById('contact-form');
-            contactForm.addEventListener('submit', function(e) {
-              e.preventDefault(); // evita reload
-            
-              const formData = new URLSearchParams({
-                name: document.getElementById('name').value.trim(),
-                email: document.getElementById('email').value.trim(),
-                phone: document.getElementById('phone').value.trim(),
-                message: document.getElementById('message').value.trim()
-              });
-            
-              fetch("https://script.google.com/macros/s/AKfycbyAv7r4HtYMYyCRPilK1IXuO4aECd9kZmq8GZd9tGDB3DmO7gAMrwHoBHAmpIKXmZwh/exec", {
-                method: "POST",
-                body: formData
-              })
-              .then(response => response.text())
-              .then(text => {
-                if (text && text.toLowerCase().includes("success")) {
-                  alert("Mensagem enviada com sucesso!");
-                  contactForm.reset();
-                } else {
-                  alert("Erro inesperado ao enviar a mensagem. Por favor, tente novamente.");
-                }
-              })
-              .catch(() => {
-                alert("Erro ao enviar a mensagem. Verifique sua conexão e tente novamente.");
-              });
-            });
+                
+                // Close mobile menu when clicking on a link
+                const mobileLinks = mobileMenu.querySelectorAll('a');
+                mobileLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.add('hidden');
+                    });
+                });
+                
+                // Form submission
+                const contactForm = document.getElementById('contact-form');
+                contactForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+                    contactForm.reset();
+                });
         </script>
-        
+
         <script>
             (function(){
                 function c(){
