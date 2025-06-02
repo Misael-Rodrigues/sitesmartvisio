@@ -952,16 +952,16 @@
                         method: "POST",
                         body: new URLSearchParams(formData),
                     })
-                    .then(response => response.json())
-                    .then(data => {
-                        if(data.result === 'success') {
+                    .then(response => response.text())
+                    .then(text => {
+                        if(text === "Success") {
                             alert("Mensagem enviada com sucesso!");
                             contactForm.reset();
                         } else {
-                            alert("Erro ao enviar a mensagem: " + data.message);
+                            alert("Erro ao enviar a mensagem. Tente novamente.");
                         }
                     })
-                    .catch(error => {
+                    .catch(() => {
                         alert("Erro ao enviar a mensagem. Tente novamente.");
                     });
         </script>
