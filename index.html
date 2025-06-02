@@ -949,20 +949,21 @@
         
                 // Envia os dados para o Google Apps Script via POST
                 fetch("https://script.google.com/macros/s/AKfycbyAv7r4HtYMYyCRPilK1IXuO4aECd9kZmq8GZd9tGDB3DmO7gAMrwHoBHAmpIKXmZwh/exec", {
-                    method: "POST",
-                    body: new URLSearchParams(formData),
-                })
-                .then(response => response.text())
-                .then(result => {
-                    // Exibe uma mensagem de sucesso ou falha
-                    alert("Mensagem enviada com sucesso!");
-                    contactForm.reset();  // Limpa o formulário
-                })
-                .catch(error => {
-                    // Se houver erro
-                    alert("Erro ao enviar a mensagem. Tente novamente.");
-                });
-            });
+                        method: "POST",
+                        body: new URLSearchParams(formData),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if(data.result === 'success') {
+                            alert("Mensagem enviada com sucesso!");
+                            contactForm.reset();
+                        } else {
+                            alert("Erro ao enviar a mensagem: " + data.message);
+                        }
+                    })
+                    .catch(error => {
+                        alert("Erro ao enviar a mensagem. Tente novamente.");
+                    });
         </script>
         
         <script>
